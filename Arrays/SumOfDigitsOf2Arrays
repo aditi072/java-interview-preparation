@@ -1,0 +1,51 @@
+import java.util.Arrays;
+
+public class Array {
+    public static void main(String[] args) {
+
+        int[] arr1 = {9,6,7,9,1};
+        int[] arr2 = {3,7,1,2};
+        int m = arr1.length; int n = arr2.length;
+        int[] result = sumOfArrayDigits(arr1, arr2, m, n);
+        for(int p=0;p<result.length;p++){
+            System.out.print(result[p]);
+        }
+    }
+
+    public static int[] sumOfArrayDigits(int[] arr1, int[] arr2, int m, int n){
+        int resSize = Math.max(m,n);
+        int[] result = new int[resSize];
+
+        int i = arr1.length - 1;
+        int j = arr2.length - 1;
+        int k = result.length-1;
+
+        int carry = 0;
+        while(i>=0 || j>=0){
+            int val1 = i >=0 ? arr1[i] : 0;
+            int val2 = j >=0 ? arr2[j] : 0;
+            int sum = val1 + val2 + carry;
+
+            if(sum>9){   
+                int lastDigit = sum % 10;
+                carry = sum / 10;
+                result[k] = lastDigit;
+            } else {
+                result[k] = sum;
+            }
+
+            i--; j--; k--;
+        }
+
+        if(carry >0){
+            int[] nres = new int[resSize+1];
+            nres[0] = carry;
+            for(int c=0;c<resSize;c++){
+                nres[c+1] = result[c];
+            }
+            return nres;
+        }
+        return result;
+    }
+
+}
