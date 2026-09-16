@@ -1,0 +1,14 @@
+class Solution {
+    public int numWaterBottles(int n, int k) {
+        int ans = n;
+        int newBottles =0; 
+        int remBottles = 0;
+        while(n>=k){
+            newBottles = n/k;
+            remBottles = n%k;
+            ans = ans + newBottles;
+            n = newBottles + remBottles;
+        }
+        return ans;
+    }
+}
